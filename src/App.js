@@ -1,24 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import LoginPage from "./Layouts/Pages/LoginPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import Layout from "./Layouts/Components/Layout";
+import "rsuite/styles/index.less"; // or 'rsuite/dist/rsuite.min.css'
+import TasksList from "./Layouts/Pages/Tasks/TasksList";
+import SignUp from "./Layouts/Components/SignUp";
+import UsersList from "./Layouts/Pages/User/UsersList";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AddUsers from "./Layouts/Pages/User/AddUsers";
+import AddTasks from "./Layouts/Pages/Tasks/AddTasks";
 function App() {
+  let { param } = useParams();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+
+        <Route
+          path="/AddUsers"
+          element={
+            <Layout>
+              <AddUsers />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/UsersList"
+          element={
+            <Layout>
+              <UsersList />
+            </Layout>
+          }
+        />
+
+        <Route path="/SignUp" element={<SignUp />} />
+
+        <Route
+          path="/TasksList"
+          element={
+            <Layout>
+              <TasksList />
+            </Layout>
+          }
+        />
+        <Route
+          path="/AddTasks"
+          element={
+            <Layout>
+              <AddTasks />
+            </Layout>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
